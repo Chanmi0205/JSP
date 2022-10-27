@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Request</title>
+</head>
+<body>
+
+	<!-- get:url에 보여지는 것, post:url에 안 보여지는 것 -->
+	<form method="get" action="RequestWebInfo.jsp">
+		<input type="text" name="id" placeholder="가이드 라인"/>
+		<input type="password" name="pw"/>
+		<input type="submit" value="POST방식으로 로그인"/>
+	</form>
+	
+	<form method="post" action="RequestWebInfo.jsp">
+		<label>chicken <input type="checkbox" name="food" value="chichen"/> </label>
+		<label>pizza <input type="checkbox" name="food" value="pizza"/> </label>
+		<label>hamburger <input type="checkbox" name="food" value="hamburger"/> </label>
+		<input type="submit" value="제출"/>
+	</form>
+
+</body>
+</html>
