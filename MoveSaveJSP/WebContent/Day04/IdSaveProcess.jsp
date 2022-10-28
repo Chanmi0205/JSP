@@ -10,7 +10,7 @@
 <title>로그인&아이디 저장(쿠키)</title>
 </head>
 <body>
-
+	
 	<%
 	String user_id = request.getParameter("user_id");
 	String user_pw = request.getParameter("user_pw");
