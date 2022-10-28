@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 & 아이디 저장(쿠키)</title>
+<title>로그인&아이디 저장(쿠키)</title>
 </head>
 <body>
 
