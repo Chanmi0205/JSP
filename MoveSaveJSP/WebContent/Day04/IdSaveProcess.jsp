@@ -41,8 +41,7 @@
 			*/
 			
 			CookieManger.deleteCookie(response, "loginId");
-			}
-		
+		}
 			JSFunction.alertLocation("로그인에 성공했습니다.", "IdsaveMain.jsp", out);
 		
 		} else {
