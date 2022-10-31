@@ -26,7 +26,8 @@ public class CookieManger {
                     cookieValue = c.getValue();  // 반환 값 갱신
                 }
             }
-        }
+        } 
+        
         return cookieValue;
     }
 
