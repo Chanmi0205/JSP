@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="common.JDBConnect" %>
+<%@ page import="common.DBConnPool" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 </head>
 
 	<% 
-		// 생성자1 test
+		/* // 생성자1 test
 		JDBConnect jdbc1 = new JDBConnect();
 		jdbc1.close();
 		
@@ -26,7 +27,10 @@
 		 
 		// 생정자3 test
 		JDBConnect jdbc3 = new JDBConnect(application);
-		jdbc3.close();
+		jdbc3.close();   */
+		
+		DBConnPool pool = new DBConnPool();
+		pool.close();
 	%>
 
 </body>
