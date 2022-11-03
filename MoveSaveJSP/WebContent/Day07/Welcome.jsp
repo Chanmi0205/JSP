@@ -9,7 +9,7 @@
 <body>
        
 	<h2>Welcome</h2>
-	<!-- test2 -->
+	<!-- test3 -->
 	<%
 		String name = request.getParameter("name");
 		out.println(name+"님 환경합니다."); 
