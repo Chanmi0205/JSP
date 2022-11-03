@@ -21,8 +21,8 @@
 		Statement st = jdbc.conn.createStatement();
 		
 		ResultSet r = st.executeQuery(sql);
-		
 		while(r.next()) {
+		
 			
 			String id = r.getString(1);
 			String pw = r.getString(2);

@@ -30,11 +30,11 @@
 	    </form>
 	
 		<%
-		    String id = request.getParameter("id");
+		    JDBConnect jdbc = new JDBConnect();
+
+			String id = request.getParameter("id");
 		    String pw = request.getParameter("pw");
 		    String name = request.getParameter("name");
-
-		    JDBConnect jdbc = new JDBConnect();
 		    
 		    System.out.println("id : " + id + ", pw : " + pw + ", name : " + name);
 		   
@@ -42,18 +42,26 @@
 			String sql2 = "SELECT id FROM member WHERE id=?";
 			PreparedStatement ps2 = jdbc.conn.prepareStatement(sql2);
 			ps2.setString(1, id);
+			ResultSet r = ps2.executeQuery();
 			
 			// ver2 - Statement 사용
 			/* String sql3 = "SELECT id FROM WHERE id=" + id;
 			(import) Statement st = jdbc.conn.createStatement();
 			st.excuteUpdate(sql3); */
 			
-			ResultSet r = ps2.executeQuery();
 			
 			if(r.next()) {
+				
+				/* request.getRequestDispatcher("Register.jsp?error=1").forward(request, response);
+				String error = request.getParameter("error");
+				if(	error != null )	out.println("중복된 id입니다");
+				jdbc.close(); */
+				
 				out.println("중복된 id입니다");
-		    } else if ( id != null && pw != null && name != null ) {
-			    String sql = "INSERT INTO member VALUES(?, ?, ?, sysdate)";
+				
+			} else if ( id != null && pw != null && name != null ) {
+			
+				String sql = "INSERT INTO member VALUES(?, ?, ?, sysdate)";
 			    PreparedStatement ps = jdbc.conn.prepareStatement(sql);
 			    ps.setString(1, id);
 			    ps.setString(2, pw);
@@ -62,10 +70,16 @@
 			    ps.executeUpdate();
 		    	request.setAttribute("name", name);
 				request.getRequestDispatcher("Welcome.jsp").forward(request, response);	
-		    }
+			}
 			
-			jdbc.close();	
-			
+			/*
+				while(r.next()) {
+					request.getRequestDispatcher("Register.jsp?error=1").forward(request, response);
+					String error = request.getParameter("error");
+					if(	error != null )	out.println("중복된 id입니다");
+				}
+			*/
+			jdbc.close();
     	%>
 	
 </body>
