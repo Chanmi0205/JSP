@@ -9,12 +9,9 @@
 <body>
        
 	<h2>Welcome</h2>
-	
-	<%
-		String name = request.getParameter("name");
-		out.println(name+"님 환경합니다."); 
-	%> 
-
+		
+	<%=session.getAttribute("user_name")+"님 환영합니다"%>
+	 
 	
 </body>
 </html>

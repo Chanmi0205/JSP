@@ -10,77 +10,101 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 - </title>
+
 </head>
 	<body>
-	    <h1>회원가입</h1>
-	    <form action="Register.jsp" method="post">
-	        <label><strong>ID</strong> 
-	            <input type="text" name="id" placeholder="ID를 입력하세요" required>
-	        </label> 
-	        <br>
-	        <label><strong>Password</strong> 
-	            <input type="password" name="pw" placeholder="비밀번호를 적어주세요" required>
-	        </label>
-	        <br>
-	        <label><strong>Name</strong>
-	            <input type="text" name="name" placeholder="영어 이름을 적어주세요" required>
-	        </label>
-	        <br>
-	        <input type="submit" value="회원가입">
-	    </form>
-	
-		<%
-		    JDBConnect jdbc = new JDBConnect();
 
-			String id = request.getParameter("id");
-		    String pw = request.getParameter("pw");
-		    String name = request.getParameter("name");
+// 		    JDBConnect jdbc = new JDBConnect();
+
+// 			String id = request.getParameter("id");
+// 		    String pw = request.getParameter("pw");
+// 		    String name = request.getParameter("name");
 		    
-		    System.out.println("id : " + id + ", pw : " + pw + ", name : " + name);
+// 		    System.out.println("id : " + id + ", pw : " + pw + ", name : " + name);
 		   
-			// ver1 - PreparedStatement 사용
-			String sql2 = "SELECT id FROM member WHERE id=?";
-			PreparedStatement ps2 = jdbc.conn.prepareStatement(sql2);
-			ps2.setString(1, id);
-			ResultSet r = ps2.executeQuery();
+// 			// ver1 - PreparedStatement 사용
+// 			String sql2 = "SELECT id FROM member WHERE id=?";
+// 			PreparedStatement ps2 = jdbc.conn.prepareStatement(sql2);
+// 			ps2.setString(1, id);
+// 			ResultSet r = ps2.executeQuery();
 			
-			// ver2 - Statement 사용
-			/* String sql3 = "SELECT id FROM WHERE id=" + id;
-			(import) Statement st = jdbc.conn.createStatement();
-			st.excuteUpdate(sql3); */
+// 			// ver2 - Statement 사용
+// 			/* String sql3 = "SELECT id FROM WHERE id=" + id;
+// 			(import) Statement st = jdbc.conn.createStatement();
+// 			st.excuteUpdate(sql3); */
 			
 			
-			if(r.next()) {
+// 			if(r.next()) {
 				
-				/* request.getRequestDispatcher("Register.jsp?error=1").forward(request, response);
-				String error = request.getParameter("error");
-				if(	error != null )	out.println("중복된 id입니다");
-				jdbc.close(); */
+// 				/* request.getRequestDispatcher("Register.jsp?error=1").forward(request, response);
+// 				String error = request.getParameter("error");
+// 				if(	error != null )	out.println("중복된 id입니다");
+// 				jdbc.close(); */
 				
-				out.println("중복된 id입니다");
+// 				out.println("중복된 id입니다");
 				
-			} else if ( id != null && pw != null && name != null ) {
+// 			} else if ( id != null && pw != null && name != null ) {
 			
-				String sql = "INSERT INTO member VALUES(?, ?, ?, sysdate)";
-			    PreparedStatement ps = jdbc.conn.prepareStatement(sql);
-			    ps.setString(1, id);
-			    ps.setString(2, pw);
-			    ps.setString(3, name);
+// 				String sql = "INSERT INTO member VALUES(?, ?, ?, sysdate)";
+// 			    PreparedStatement ps = jdbc.conn.prepareStatement(sql);
+// 			    ps.setString(1, id);
+// 			    ps.setString(2, pw);
+// 			    ps.setString(3, name);
 			    
-			    ps.executeUpdate();
-		    	request.setAttribute("name", name);
-				request.getRequestDispatcher("Welcome.jsp").forward(request, response);	
-			}
+// 			    ps.executeUpdate();
+// 		    	request.setAttribute("name", name);
+// 				request.getRequestDispatcher("Welcome.jsp").forward(request, response);	
+// 			}
 			
-			/*
-				while(r.next()) {
-					request.getRequestDispatcher("Register.jsp?error=1").forward(request, response);
-					String error = request.getParameter("error");
-					if(	error != null )	out.println("중복된 id입니다");
-				}
-			*/
-			jdbc.close();
-    	%>
+// 			/*
+// 				while(r.next()) {
+// 					request.getRequestDispatcher("Register.jsp?error=1").forward(request, response);
+// 					String error = request.getParameter("error");
+// 					if(	error != null )	out.println("중복된 id입니다");
+// 				}
+// 			*/
+// 			jdbc.close();
+
+	<%
+        String id = request.getParameter("id");
+        String pw = request.getParameter("pw");
+        String name = request.getParameter("name");
+        
+        // 유저가 입력한 값을 DB에 삽입
+        
+        // 1. DB에 연결
+        JDBConnect jdbc = new JDBConnect();
+
+        // 유저가 입력한 id값이 DB 내에 이미 있다면 -> 중복된 id입니다
+        // 아니라면 -> 회원가입 시켜주기
+        
+        String sql1 = "SELECT id FROM member WHERE id=?";
+        PreparedStatement ps2 = jdbc.conn.prepareStatement(sql1);
+        ps2.setString(1, id);
+        ResultSet r = ps2.executeQuery();
+        
+        String sql3 = "INSERT INTO member VALUES(?, ?, ?, sysdate)";
+        PreparedStatement ps = jdbc.conn.prepareStatement(sql3);
+        ps.setString(1, id);
+        ps.setString(2, pw);
+        ps.setString(3, name);
+                
+        if(r.next()){
+            // 중복 O
+            // 중복된 ID입니다. 출력하도록 Dispatch
+            jdbc.close();
+            request.getRequestDispatcher("Register.jsp?error=1").forward(request, response);
+        }
+        else{
+            // 중복X
+            // 회원가입 처리 & welcome.jsp로 이동    
+            int result = ps.executeUpdate();
+            System.out.println(result + "행이 DB에 입력되었습니다.");
+            jdbc.close();
+            session.setAttribute("user_name", name);
+            response.sendRedirect("Welcome.jsp");
+        }
+    %>
 	
 </body>
 </html>

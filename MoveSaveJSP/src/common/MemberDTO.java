@@ -3,22 +3,24 @@ package common;
 public class MemberDTO {
 	
 	private String id;
-	private String pwd;
+	private String pass;
 	private String name;
+	private String regidate;
 	
-	public MemberDTO() {}
+	public MemberDTO() {
+		super();
+	}
 	
-	public MemberDTO(String id, String pwd) {
+	public MemberDTO(String id, String pass) {
 		this.id = id;
-		this.pwd = pwd;
+		this.pass = pass;
 	}
 
-	public MemberDTO(String id, String pwd, String name) {
+	public MemberDTO(String id, String pass, String name) {
 		this.id = id;
-		this.pwd = pwd;
+		this.pass = pass;
 		this.name = name;
 	}
-	
 
 	public String getId() {
 		return id;
@@ -28,12 +30,12 @@ public class MemberDTO {
 		this.id = id;
 	}
 
-	public String getPwd() {
-		return pwd;
+	public String getPass() {
+		return pass;
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 	public String getName() {
@@ -44,9 +46,17 @@ public class MemberDTO {
 		this.name = name;
 	}
 
+	public String getRegidate() {
+		return regidate;
+	}
+
+	public void setRegidate(String regidate) {
+		this.regidate = regidate;
+	}
+
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", pwd=" + pwd + ", name=" + name + "]";
+		return "MemberDTO [id=" + id + ", pass=" + pass + ", name=" + name + "]";
 	}
 
 }
