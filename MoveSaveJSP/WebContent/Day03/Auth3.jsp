@@ -16,7 +16,7 @@
 		
 		MemberDTO m1 = (MemberDTO)application.getAttribute("memberInfo");
 		
-		if(userId.equalsIgnoreCase(m1.getId()) && userPwd.equalsIgnoreCase(m1.getPwd())) {
+		if(userId.equalsIgnoreCase(m1.getId()) && userPwd.equalsIgnoreCase(m1.getPass())) {
 			request.setAttribute("userId", m1.getName());
 			request.getRequestDispatcher("Welcome.jsp").forward(request, response);
 		} else {
