@@ -14,9 +14,9 @@ public class MemberDAO extends JDBConnect {
 		super(drv, url, id, pw);
 	}
 	
-	/*
-	 * public MemberDAO(ServletContext application) { super(application); }
-	 */
+	
+	 public MemberDAO(ServletContext application) { super(application); }
+	 
 	
 	// 로그인 처리(id, pw값과 일치하는 회원 정보 반환)
 	public MemberDTO getMemberDTO(String uid, String upass) {
@@ -43,5 +43,53 @@ public class MemberDAO extends JDBConnect {
 		}
 		return dto;
 		
+	}
+	
+	
+	public boolean deleteUser(String uid, String upass) {
+
+		String sql = "delete FROM member where id=? AND pass=?";
+		
+		/*
+		 * String sql1 = "SELECT * FROM member WHERE id=? AND pass=?";
+		 * String sql2 = "DELETE FROM member WHERE id=? AND pass=?";
+		 * try {
+		 * 	 psmt = conn.prepareStatement(sql);
+		 *   psmt.setString(1, uid);
+		 *   psmt.setString(2, upass);
+		 *   rs = psmt.executeQuery();
+		 *  
+		 *  if ( rs.next() ) {
+		 *  	psmt = conn.prepareStatement(sql2);
+		 *  	psmt.setString(1, uid);
+		 *  	psmt.setString(2, upass);
+		 *  
+		 *  	int result = psmt.executeUpdate();
+		 *  	System.out.println(result+"개의 데이터가 삭제되었습니다.");
+		 *  	
+		 *  	return true;
+		 *  }
+		 *   catch (Exception e) {
+		 *  	e.printStackTrace();
+		 *  }
+		 *  
+		 *  return false;
+		 *  
+		 * */
+		
+		try {
+			 // X conn.createStatement();
+			 psmt = conn.prepareStatement(sql);
+			 psmt.setString(1, uid);
+			 psmt.setString(2, upass);
+			 int result = psmt.executeUpdate();
+			 
+			 if ( result == 1 ) {
+				 return true; 
+			 }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

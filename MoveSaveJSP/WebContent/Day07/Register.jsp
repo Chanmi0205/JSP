@@ -9,11 +9,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 - </title>
+<title>회원가입</title>
 
 </head>
 	<body>
-
+	
 // 		    JDBConnect jdbc = new JDBConnect();
 
 // 			String id = request.getParameter("id");
@@ -63,10 +63,10 @@
 // 					if(	error != null )	out.println("중복된 id입니다");
 // 				}
 // 			*/
-// 			jdbc.close();
+// 			jdbc.close();	
 
-	<%
-        String id = request.getParameter("id");
+	<% 
+		String id = request.getParameter("id");
         String pw = request.getParameter("pw");
         String name = request.getParameter("name");
         
@@ -98,9 +98,7 @@
         else{
             // 중복X
             // 회원가입 처리 & welcome.jsp로 이동    
-            int result = ps.executeUpdate();
-            System.out.println(result + "행이 DB에 입력되었습니다.");
-            jdbc.close();
+           	jdbc.close();
             session.setAttribute("user_name", name);
             response.sendRedirect("Welcome.jsp");
         }
