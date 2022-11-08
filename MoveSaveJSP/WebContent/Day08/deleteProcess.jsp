@@ -14,8 +14,8 @@
 <body>
 
 	<%
-		String userId = request.getParameter("user_id");
-    	String userPw = request.getParameter("user_pw");
+		String userId = request.getParameter("userId");
+    	String userPw = request.getParameter("userPw");
     	
     	// 유저의 id값을 받아오기(세션으로)
     	// String userId = session.getAttribute("UserId").toString();
@@ -42,7 +42,6 @@
 			// session.removeAttribute("UserId");
 			// session.removettribute("UserName");
 			session.invalidate();
-			
 			response.sendRedirect("LoginForm.jsp");
 			System.out.println(userId + ", " + userPw);
 			

@@ -12,7 +12,7 @@
 	<%= request.getAttribute("LoginErrMsg") == null ? " " : request.getAttribute("LoginErrMsg") %>
 	
 	<%
-		if( session.getAttribute("user_Id") == null ) {
+		if( session.getAttribute("userId") == null ) {
 	%>
 
 	<script>
@@ -28,8 +28,8 @@
 		}
 	</script>
 	<form action="LoginProcress.jsp" method="post" onsubmit="return vallidateForm(this)">
-		아이디 : <input type="text" name="user_id"> <br/>
-		패스워드 : <input type="password" name="user_pw"> <br/>
+		아이디 : <input type="text" name="userId"> <br/>
+		패스워드 : <input type="password" name="userPw"> <br/>
 		<input type="submit" value="로그인">
 	</form>
 	

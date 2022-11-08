@@ -11,7 +11,7 @@
 	<h2>Welcome</h2>
 		
 	<%=session.getAttribute("user_name")+"님 환영합니다"%>
-	 
+	<button type="button" onClick="location.href='../Day08/LoginForm.jsp'">[로그인]</button> 
 	
 </body>
 </html>
