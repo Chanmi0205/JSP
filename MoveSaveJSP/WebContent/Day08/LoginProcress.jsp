@@ -36,7 +36,7 @@
 		      // 로그인 성공!!!!
 		      session.setAttribute("userId", dto.getId());
 		      session.setAttribute("UserName", dto.getName());
-		      response.sendRedirect("deleteForm.jsp");
+		      response.sendRedirect("LoginForm.jsp");
 		  } else {
 		      // 로그인 실패 :(
 		      request.setAttribute("LoginErrMsg", "아이디나 비밀번호를 다시 확인해주세요.");

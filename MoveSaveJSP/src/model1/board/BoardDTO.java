@@ -65,6 +65,12 @@ public class BoardDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "BoardDTO [num=" + num + ", title=" + title + ", content=" + content + ", id=" + id + ", postdate="
+				+ postdate + ", visitcount=" + visitcount + ", name=" + name + "]";
+	}
 	
 	
 }

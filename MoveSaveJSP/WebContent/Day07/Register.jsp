@@ -84,10 +84,6 @@
         ResultSet r = ps2.executeQuery();
         
         String sql3 = "INSERT INTO member VALUES(?, ?, ?, sysdate)";
-        PreparedStatement ps = jdbc.conn.prepareStatement(sql3);
-        ps.setString(1, id);
-        ps.setString(2, pw);
-        ps.setString(3, name);
                 
         if(r.next()){
             // 중복 O
@@ -97,7 +93,14 @@
         }
         else{
             // 중복X
-            // 회원가입 처리 & welcome.jsp로 이동    
+            // 회원가입 처리 & welcome.jsp로 이동 
+			PreparedStatement ps = jdbc.conn.prepareStatement(sql3);
+        	ps.setString(1, id);
+       	 	ps.setString(2, pw);
+        	ps.setString(3, name);    
+        	 
+        	ps.executeUpdate();
+
            	jdbc.close();
             session.setAttribute("user_name", name);
             response.sendRedirect("Welcome.jsp");

@@ -23,7 +23,7 @@
 			
 			&nbsp;	&nbsp;	&nbsp;
 			
-			<button type="button" onClick="location.href='../Day08/08Board.jsp'">게시판(페이징x)</button>
+			<button type="button" onClick="location.href='../08Board/List.jsp'">게시판(페이징x)</button>
 
 			&nbsp;	&nbsp;	&nbsp;
 

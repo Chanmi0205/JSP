@@ -1,6 +1,6 @@
-<%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -33,7 +33,7 @@
 <title>회원제 게시판</title>
 </head>
 <body>
-
+	<jsp:include page="../Common/Link.jsp"/>
 	<h2>목록 보기(List)</h2>
 	
 	<form method="get">
@@ -84,7 +84,10 @@
 		<tr align="center">
 			<!-- 번호, 제목, 작성자, 조회수, 작성일 -->
 			<td> <%= virtualNum %> </td>
-			<td><button type="button" onClick="location.href=''"> <%= dto.getId() %> </button> </td>
+			<!-- onclick="location.href='List.jsp'" -->
+			<!--  ?num=<%=dto.getNum()%>;" -->
+			<td><button type="button" onclick="location.href='List.jsp?num=<%=dto.getNum()%>';"> <%= dto.getTitle() %> </button> </td>
+			<td> <%= dto.getId() %> </td>
 			<td> <%= dto.getVisitcount() %> </td>
 			<td> <%= dto.getPostdate() %> </td>
 			
@@ -93,6 +96,16 @@
 		<% } } %>
 		
 	</table>
-	
+
+		<!--  글쓰기 버튼 -->
+		<table border="1" width="100%">
+		  <tr align="right">
+		  
+		  <td> <button type="button" onclick="location.href='Write.jsp';">글쓰기</button> </td>
+		  	
+		  </tr>
+		  
+	</table>
+
 </body>
 </html>

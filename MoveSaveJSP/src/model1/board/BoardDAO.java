@@ -122,4 +122,30 @@ public class BoardDAO extends JDBConnect {
 		
 	}
 	
+	public int inserWrite(BoardDTO bto) {
+		
+		int result=0;
+		
+		try {
+			
+			String sql = "INSERT INTO board VALUES(seq_board_num.nextval, ?, ?, ?, sysdate, 0)";
+	
+			// 게시물 데이터(title, content -> BoradDTO)를 전달받아 DB에 추가!
+				
+
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setString(1, bto.getTitle());
+			psmt.setString(2, bto.getContent());
+			psmt.setString(3, bto.getId());
+				
+			result = psmt.executeUpdate();
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

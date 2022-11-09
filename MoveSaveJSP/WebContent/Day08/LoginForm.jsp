@@ -39,6 +39,7 @@
 		<%=session.getAttribute("UserName") %> 회원님, 환경합니다! <br/>
 		<button type="button" onClick="location.href='Logout.jsp'">[로그아웃]</button>
 		<button type="button" onClick="location.href='deleteForm.jsp'">[회원탈퇴]</button>
+		<button type="button" onClick="location.href='../08Board/Write.jsp'">[게시글작성]</button>
 	<% 		
 		}
 	%>
