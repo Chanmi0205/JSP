@@ -148,4 +148,57 @@ public class BoardDAO extends JDBConnect {
 		return result;
 	}
 	
+	// 4. 게시글 제목 클릭 시 해당 게시물의 상세 내용을 보여주는, 
+	// 즉 게시물의 내용을 반환하는 함수 selectView
+	
+	//게시물 구분방법 : 전달받은 num을 기준으로 board에서 검색 & 
+	//id값을 기준으로 member table에서 name값을 함께 가져와야 함!
+	public BoardDTO selectView(String num) { 
+		
+		BoardDTO bto = new BoardDTO();
+		
+		try {
+			
+			String sql = "SELECT board.*, member.name FROM board INNER JOIN member ON board.id = member.id WHERE num=?";
+			//SELECT B.*, M.name FROM member M INNER JOIN board B on B.id = M.id WHERE num=?
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, num);			
+			rs = psmt.executeQuery();
+			
+			if ( rs.next()) {
+				bto.setNum(rs.getString("num"));
+				bto.setTitle(rs.getNString("title"));
+				bto.setContent(rs.getString("content"));
+				bto.setId(rs.getString("id"));
+				bto.setPostdate(rs.getDate("postdate"));
+				bto.setVisitcount(rs.getString("visitcount"));
+				
+				bto.setName(rs.getString("name"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return bto;
+	}
+	
+	//5. 유저가 게시물을 클릭 시, 해당 게시물의 조회수를 1 증가시키는 updateVisitCount() 함수
+	
+	public void updateVisitCount(String num) {
+		
+		// UPDATE 테이블명 SET 컬럼 = 변경할값 WHERE 조건
+		String sql = "UPDATE board SET visitcount=visitcount+1 WHERE num=?";
+		
+		try {
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, num);
+			psmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

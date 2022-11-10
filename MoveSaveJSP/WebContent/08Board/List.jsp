@@ -86,7 +86,7 @@
 			<td> <%= virtualNum %> </td>
 			<!-- onclick="location.href='List.jsp'" -->
 			<!--  ?num=<%=dto.getNum()%>;" -->
-			<td><button type="button" onclick="location.href='List.jsp?num=<%=dto.getNum()%>';"> <%= dto.getTitle() %> </button> </td>
+			<td><button type="button" onclick="location.href='View.jsp?num=<%=dto.getNum()%>';"> <%= dto.getTitle() %> </button> </td>
 			<td> <%= dto.getId() %> </td>
 			<td> <%= dto.getVisitcount() %> </td>
 			<td> <%= dto.getPostdate() %> </td>
