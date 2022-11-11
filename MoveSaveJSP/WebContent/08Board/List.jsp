@@ -31,6 +31,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원제 게시판</title>
+
 </head>
 <body>
 	<jsp:include page="../Common/Link.jsp"/>

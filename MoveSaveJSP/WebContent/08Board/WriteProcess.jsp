@@ -4,13 +4,6 @@
 <%@ page import="model1.board.BoardDTO" %>
 <%@ page import="model1.board.BoardDAO" %>
 <%@ include file="./IsLoggedIn.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
 	<% 
 	
@@ -41,5 +34,3 @@
 		
 	%>
 	
-</body>
-</html>

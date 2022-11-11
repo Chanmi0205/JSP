@@ -201,4 +201,47 @@ public class BoardDAO extends JDBConnect {
 			e.printStackTrace();
 		}
 	}
+	
+	// 6. 유저가 수정하고자 하는 게시물을 업데이트! (num을 기준으로 데이터를 조회, title, content값을 업데이트)
+	// int UpdateEdit(BoardDTO)
+	public int updateEdit(BoardDTO dto) {
+		
+		// num을 기주으로 title, content값 수정
+		// UPDATE 테이블명 SET 컬럼1 = 변경할값1, 컬럼2 = 변경할값2 WHERE 조건"
+		int result = 0;
+		
+		String sql = "UPDATE board SET title=?, content=? WHERE num=?";
+		
+		try {
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getNum());
+			result = psmt.executeUpdate();  // 1 : update 성공, 0 : update 실패 (실행결과 : DB에서 영향받은 줄 수)
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	// 유저가 삭제하고자 하는 게시물 삭제 (num을 기준으로 삭제)
+	public int deletePost(String num) {
+		int result = 0;
+		
+		// DELETE FROM 테이블명 WHERE 조건
+		String sql ="DELETE FROM board WHERE num=?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, num);
+			result = psmt.executeUpdate();			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+
+	}
 }
