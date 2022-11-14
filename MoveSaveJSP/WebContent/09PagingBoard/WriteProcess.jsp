@@ -15,17 +15,11 @@
         String content = request.getParameter("content");
         
         dto.setId(id);
-//         dto.setTitle(title);
+        dto.setTitle(title);
         dto.setContent(content);
         
-        int result = 0;
-        
-// 	    int result = dao.inserWrite(dto);
-
-	    for(int i=1; i<=100; i++) {
-	    	dto.setTitle(title + " - " + i);
-	    	result = dao.inserWrite(dto);
-	    }
+	    int result = dao.inserWrite(dto);
+	    
 	    
 	    dao.close();
         
