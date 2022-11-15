@@ -122,6 +122,52 @@ public class BoardDAO extends JDBConnect {
 		
 	}
 	
+	// 8. 각 페이지에서 출력할 게시물 데이터를 변환 : selectListPage()
+	// ex. 1페이지 : 1~10번 게시물, 2페이지 : 11~20번 게시물
+	// "rownum" ->  가상의 컬럼. select 쿼리문으로 추출된 데이터(resultSet. 테이블) 내에서 순차적을 부여되는 순번(sum)
+	public List<BoardDTO> selectListPage(Map<String,  Object>map) {
+		
+		List<BoardDTO> bbs = new Vector<BoardDTO>();
+        
+        // 현재 선택된 페이지가 "1페이지" -> 1~10번 게시물을 가져와야 하는 상황!        
+        //"SELECT * FROM (SELECT Tb.*, rownum rNum FROM (SELECT * FROM board ORDER BY num DESC) Tb) WHERE rNum BETWEEN 1 and 10"
+        String sql = "SELECT * FROM (SELECT Tb.*, rownum rNum FROM (SELECT * FROM board ";
+        if(map.get("searchWord") != null) {
+            sql += " WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%'";
+        }             
+        sql += " ORDER BY num DESC) Tb) WHERE rNum BETWEEN ? and ?";
+        
+        // "SELECT * FROM (SELECT Tb.*, rownum rNum FROM (SELECT * FROM board WHERE title/content LIKE '%검색키워드%' ORDER BY num DESC) Tb)
+        // WHERE rNum BETWEEN ? and ?"
+				
+				try {
+					psmt = conn.prepareStatement(sql);
+					psmt.setString(1, map.get("start").toString());
+					psmt.setString(2, map.get("end").toString());
+					
+					rs = psmt.executeQuery();
+					
+					while(rs.next()) {
+						BoardDTO bto = new BoardDTO();
+						
+						bto.setNum(rs.getString("num"));
+						bto.setTitle(rs.getNString("title"));
+						bto.setContent(rs.getString("Content"));
+						bto.setPostdate(rs.getDate("postdate"));
+						bto.setId(rs.getString("id"));
+						bto.setVisitcount(rs.getString("visitcount"));
+						
+						bbs.add(bto);
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+		return bbs;
+
+	}
+	
 	public int inserWrite(BoardDTO bto) {
 		
 		int result=0;
@@ -244,4 +290,5 @@ public class BoardDAO extends JDBConnect {
 		return result;
 
 	}
+	 
 }

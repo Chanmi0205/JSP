@@ -20,6 +20,8 @@
     
 	    <form action="Register.jsp" method="post">
 	        <label><strong>ID</strong> 
+	       
+	       
 	            <input type="text" name="id" placeholder="ID를 입력하세요" required>
 	        </label> 
 	        <br>

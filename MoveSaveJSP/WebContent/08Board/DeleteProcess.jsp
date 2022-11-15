@@ -10,7 +10,7 @@
 	BoardDAO dao = new BoardDAO(application);
 	BoardDTO dto = dao.selectView(num);
 	
-	String sessionId = session.getAttribute("UserId").toString();
+	String sessionId = session.getAttribute("userId").toString();
 	int result = dao.deletePost(num);
 	dao.close();
 
