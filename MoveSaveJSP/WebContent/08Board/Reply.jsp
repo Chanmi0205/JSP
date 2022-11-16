@@ -16,14 +16,14 @@
 	rto.setId(sessionId);
 	rto.setr_Content(r_content);
 	
-	int result = rao.replyCreate(rto);
+// 	int result = rao.replyCreate(rto);
 
-	if ( result == 1 && sessionId.equals(rto.getId())) {
-		response.sendRedirect("List.jsp");	
-	} else {
-		JSFunction.alertBack("댓글 작성이 실패했습니다 :/", out);	
-		response.sendRedirect("List.jsp");	
-	}
+// 	if ( result == 1 && sessionId.equals(rto.getId())) {
+// 		response.sendRedirect("List.jsp");	
+// 	} else {
+// 		JSFunction.alertBack("댓글 작성이 실패했습니다 :/", out);	
+// 		response.sendRedirect("List.jsp");	
+// 	}
 	
 	rao.close();
 	
