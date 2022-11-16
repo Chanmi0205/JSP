@@ -3,6 +3,8 @@
     
 <%@ page import="model1.board.BoardDAO" %>
 <%@ page import="model1.board.BoardDTO" %>
+<%@ page import="model1.board.ReplyDAO" %>
+<%@ page import="model1.board.ReplyDTO" %>
 
 <%
 	String num = request.getParameter("num");
@@ -11,8 +13,14 @@
 	dao.updateVisitCount(num);
 	BoardDTO dto = dao.selectView(num);
 	
+	ReplyDAO rao = new ReplyDAO(application);
+	ReplyDTO rto = rao.selectView(num);
+	
+	int result = rao.replyCreate(rto);
 	dao.close();
+	rao.close();
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,6 +99,27 @@
 			</tr>
 		
 		</table>
+		
+		<table border="1" style="width:100%">
+			
+			<tr>
+				<td><%=rto.getId() %></td>
+				<td><%=rto.getr_Content() %></td>
+				<td><%=rto.getPostdate() %></td>
+			</tr>
+		
+		</table>
+		
+		<h2>댓글</h2>
+		<table border="1" style="width:100%">
+			<tr>
+				<td> <textarea style="width:98.5%; height:100px; resize:none" name="r_content" required></textarea> </td>
+			</tr>
+			<tr>
+				<td> <button type="submit" onclick="location.href='Reply.jsp';">댓글 작성</button> </td>
+			</tr>
+		</table>
+		
 	</form>
 	
 </body>
